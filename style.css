@@ -1,0 +1,109 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;    
+}
+
+.nav-link-item{
+    text-decoration: none;
+}
+.hamburger-button{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: #d1d6c6;
+    font-size: 2.5rem;
+    font-style: bold;
+    visibility: hidden;
+}
+.hamburger-button:hover{
+    cursor: pointer;
+    color: #f3ebeb;
+}
+.nav-link-item a{
+    color: antiquewhite;
+    text-decoration: none;
+}
+.nav-link-item a:hover{
+    color: rgb(255, 255, 255);
+}
+.nav-link-item li{
+    display: block;
+    float: left;
+    list-style: none;
+    margin-right: 1rem;
+    padding: 0.3rem;
+}
+.drop-down-id{
+    display: none;
+}
+.drop-down{
+    display: inline;
+    list-style: none;
+    margin-right: 1rem;
+    padding: 0.3rem;
+}
+.drop-down a{
+    display:block;
+    text-decoration: none;
+    list-style: none;
+    color: rgb(243, 234, 234);
+}
+.drop-down a:hover{
+    color: rgb(253, 251, 251);
+}
+.doctor-info{
+    width: 18rem;
+    padding: 1rem 1rem;
+}
+
+footer div{
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+}
+.copyright{
+    background-color: #24629c;
+    color: #fff;
+    text-align: center;
+    padding-top: 1rem;
+}
+.user-in:hover{
+    background-color: #7ca8da;
+    transition: 0.3s;
+}
+@media (max-width:800px){
+    .hamburger-button{
+        visibility: visible;
+    }
+    .nav-link-item{
+        visibility: hidden;
+    }
+    .carousel-parent{
+        height: 10rem;
+        object-fit: cover;
+    }
+}
+@media (min-width:800px){
+    .hamburger-button{
+        visibility: hidden;
+    }
+    .nav-link-item{
+        visibility: visible;
+    }
+    .container{
+        width: 60%;
+    }
+}
+.pop-up{
+    display: none;
+    height: 600px;
+    width: 60%;
+    position: absolute;
+    top: 5rem;
+    left: 20rem;
+    z-index: 1; /* Üstte */
+    background-color: #edf0f1;
+    border-radius: 1rem;
+    transition: visibility 0s, opacity 0.5s linear;
+}
