@@ -1,0 +1,158 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+<div class="container-fluid" style="min-height: 10rem;">
+    <div class="row">
+        <div class="col-lg-2">
+            <!--
+            <ul class="drop-down" style="display: block;">
+                <li><a href="">Kullanıcılar</a></li>
+                <li><a href="">Randevular</a></li>
+                <li><a href="">Personeller</a></li>
+                <li><a href="">Ana Sayfa Slider</a></li>
+              </ul>         -->
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                    <span class="fs-4">Menu</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li>
+                        <a href="#" name="our-doctors" class="nav-link side-bar active">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                            Our Doctors
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" name="appointments" class="nav-link side-bar link-dark">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                            Appointments
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" name="users" class="nav-link side-bar link-dark">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            Users
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                        <strong>mdo</strong>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-10">
+            <!-- <div class="pr-box d-block mt-2 p-2 border border-success rounded" style="background-color: rgb(222, 243, 227);">
+                 <div class="w-25 d-inline-block">
+                     <h6 class="">Ahmet Kaan</h3>
+                 </div>
+                 <div class="w-25 d-inline-block">
+                     <h6 class=""> ahmet.kaan@gmail.com</h3>
+                 </div>
+                 <div class="w-45 d-inline-block">
+                     <a href="" class="btn-details bg-warning text-center" style="width: 50%;">İncele</a>
+                     <a href="" class="btn-details bg-danger text-center" style="width: 5rem;">Sil</a>
+                 </div>
+
+             </div>
+             -->
+            <table id="our-doctors" class="table table-striped admin-table" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>İsim-Soyisim</th>
+                        <th>Branş</th>
+                        <th>Yaş</th>
+                        <th>Başlama Tarihi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>Ortapedi ve Travmatoloji</td>
+                        <td>61</td>
+                        <td>2011-04-25</td>
+                        <td><a class="doctor-detay" href="#">Detay</a></td>
+                    </tr>
+                    <tr>
+                        <td>Garrett Winters</td>
+                        <td>Üroloji</td>
+                        <td>63</td>
+                        <td>2011-07-25</td>
+                        <td><a class="doctor-detay" href="#">Detay</a></td>
+                    </tr>
+                    <tr>
+                        <td>Ashton Cox</td>
+                        <td>Beyin Cerrahı</td>
+                        <td>66</td>
+                        <td>2009-01-12</td>
+                        <td><a class="doctor-detay" href="#">Detay</a></td>
+                    </tr>
+                    <tr>
+                        <td>Cedric Kelly</td>
+                        <td>Kalp cerrahı</td>
+                        <td>22</td>
+                        <td>2012-03-29</td>
+                        <td><a class="doctor-detay" href="#">Detay</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table id="appointments" class="table table-striped admin-table" style="width:100%;display: none;">
+                <thead>
+                    <tr>
+                        <th>İsim-Soyisim</th>
+                        <th>Randevu Yeri</th>
+                        <th>Doktor</th>
+                        <th>Randevu Saati</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Halil Akyıldız</td>
+                        <td>Ortapedi ve Travmatoloji</td>
+                        <td>Tiger Nixon</td>
+                        <td>2011-04-25 12:00</td>
+                        <td><a class="doctor-detay" href="#">Detay</a></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="pop-up">
+    <div class="position-absolute top-0 end-0">
+        <a id="pop-up" class="btn btn-info" href="#" role="button">X</a>
+    </div>
+    <h2 class="text-center">Halil Akyıldız</h2>
+    <hr>
+    <div class="card col-lg-3 col-md-4 col-sm-6 d-inline-block">
+        <img class="card-img-top" src="/img/doctors/d1.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Lorem, ipsum dolor.</p>
+        </div>
+    </div>
+    <div class="d-inline-block">
+        <h4>Yaş: 38</h4>
+        <h4>Tecrübe: 10</h4>
+        <h4>Uzmanlık: Ortapedi ve Travmatoloji</h4>
+    </div>
+</div>
