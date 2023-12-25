@@ -88,3 +88,6 @@ C:\Users\halil\OneDrive\Masaüstü\güncel\HastaneRandevuSistemi\obj\Debug\net6.
 C:\Users\halil\OneDrive\Masaüstü\güncel\HastaneRandevuSistemi\obj\Debug\net6.0\HastaneRandevuSistemi.pdb
 C:\Users\halil\OneDrive\Masaüstü\güncel\HastaneRandevuSistemi\obj\Debug\net6.0\HastaneRandevuSistemi.genruntimeconfig.cache
 C:\Users\halil\OneDrive\Masaüstü\güncel\HastaneRandevuSistemi\obj\Debug\net6.0\ref\HastaneRandevuSistemi.dll
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\obj\Debug\net6.0\HastaneRandevuSistemi.csproj.AssemblyReference.cache
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\obj\Debug\net6.0\HastaneRandevuSistemi.csproj.CopyComplete

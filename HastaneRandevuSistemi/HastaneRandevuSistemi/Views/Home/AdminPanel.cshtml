@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Admin Panel";
 }
+
 <div class="container-fluid" style="min-height: 10rem;">
     <div class="row">
         <div class="col-lg-2">
@@ -121,13 +122,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Halil Akyıldız</td>
-                        <td>Ortapedi ve Travmatoloji</td>
-                        <td>Tiger Nixon</td>
-                        <td>2011-04-25 12:00</td>
-                        <td><a class="doctor-detay" href="#">Detay</a></td>
-                    </tr>
+                    @foreach (var person in ViewBag.data)
+                    {
+                        <tr>
+                            <td>@person.UserFirstName @person.UserSecondName</td>
+                            <td>@person.UserEmail</td>
+                            <td>@person.CreatedDate</td>
+                        </tr>
+                    }
+                    
 
                 </tbody>
             </table>

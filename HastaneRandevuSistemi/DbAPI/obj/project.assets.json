@@ -2444,11 +2444,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\halil\\OneDrive\\Masaüstü\\güncel\\DbAPI\\DbAPI.csproj",
+      "projectUniqueName": "C:\\Users\\halil\\OneDrive\\Masaüstü\\Hastana Randevu\\HastaneRandevuSistemi\\DbAPI\\DbAPI.csproj",
       "projectName": "DbAPI",
-      "projectPath": "C:\\Users\\halil\\OneDrive\\Masaüstü\\güncel\\DbAPI\\DbAPI.csproj",
+      "projectPath": "C:\\Users\\halil\\OneDrive\\Masaüstü\\Hastana Randevu\\HastaneRandevuSistemi\\DbAPI\\DbAPI.csproj",
       "packagesPath": "C:\\Users\\halil\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\halil\\OneDrive\\Masaüstü\\güncel\\DbAPI\\obj\\",
+      "outputPath": "C:\\Users\\halil\\OneDrive\\Masaüstü\\Hastana Randevu\\HastaneRandevuSistemi\\DbAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

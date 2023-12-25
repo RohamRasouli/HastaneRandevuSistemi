@@ -34,7 +34,7 @@ namespace DbAPI.Controllers
             //                return BadRequest("Kullanýcý bulunamadý");
             //            }
             var _context = new DbHastaneContext();
-            return Ok(_context.Users.Select(x => x.UserEmail));
+            return Ok(_context.Users.ToList());
         }
         //[HttpGet]
         //[Route("[action]/{id:int}")]
