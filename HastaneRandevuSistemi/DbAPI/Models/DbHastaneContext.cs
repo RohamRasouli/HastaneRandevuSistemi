@@ -29,7 +29,7 @@ namespace DbAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=DbHastane;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-28GDF39\\SQLEXPRESS;Database=DbHastane;Trusted_Connection=True;");
             }
         }
 
@@ -57,7 +57,7 @@ namespace DbAPI.Models
             modelBuilder.Entity<DoctorsMainScienceBranch>(entity =>
             {
                 entity.HasKey(e => e.DoctorScienceId)
-                    .HasName("PK__DoctorsM__21866EFE42FCF376");
+                    .HasName("PK__DoctorsM__21866EFE6584999B");
 
                 entity.ToTable("DoctorsMainScienceBranch");
 
@@ -73,7 +73,7 @@ namespace DbAPI.Models
             modelBuilder.Entity<MainScienceBranch>(entity =>
             {
                 entity.HasKey(e => e.MainScienceBranchıd)
-                    .HasName("PK__MainScie__1F92762DB30B2F3F");
+                    .HasName("PK__MainScie__1F92762D0294CF20");
 
                 entity.ToTable("MainScienceBranch");
 
@@ -98,7 +98,7 @@ namespace DbAPI.Models
             modelBuilder.Entity<Status>(entity =>
             {
                 entity.HasKey(e => e.StatuId)
-                    .HasName("PK__Status__C7DB7B795C32BD72");
+                    .HasName("PK__Status__C7DB7B79A5075D7D");
 
                 entity.ToTable("Status");
 

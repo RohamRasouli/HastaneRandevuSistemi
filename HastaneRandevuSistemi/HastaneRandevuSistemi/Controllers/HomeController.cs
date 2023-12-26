@@ -1,10 +1,12 @@
 ﻿using HastaneRandevuSistemi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using System.Xml.Linq;
 
 namespace HastaneRandevuSistemi.Controllers
 {
@@ -26,6 +28,7 @@ namespace HastaneRandevuSistemi.Controllers
             return View();
         }
         [HttpGet]
+        [Authorize]
         public IActionResult AdminPanel()
         {
             List<User> users = new List<User>();
@@ -73,8 +76,28 @@ namespace HastaneRandevuSistemi.Controllers
             }
             return View();
         }
+        public IActionResult UserHome()
+        {
+            return View();
+        }
+        [HttpGet]
         public IActionResult LogIn() 
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult LogIn(string email, string password)
+        {
+            User _user = new User();
+            List<User> users = new List<User>();
+            var response = _client.GetAsync(_client.BaseAddress + "Db/UserLogin/"+email.ToString()+","+password.ToString()).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsStringAsync().Result;
+                users = JsonConvert.DeserializeObject<List<User>>(data);
+                TempData["email"] = users[0].UserEmail;
+                return RedirectToAction("UserHome");
+            }
             return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

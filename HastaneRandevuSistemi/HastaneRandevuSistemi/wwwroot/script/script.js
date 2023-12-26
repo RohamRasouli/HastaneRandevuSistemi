@@ -44,11 +44,12 @@ $(document).ready(function(){
       $("li").find("a.side-bar").removeClass('active');
       $("li").find("a.side-bar").addClass('link-dark'); 
         $(this).addClass('active');
-        $("div").find("table").hide();
+        // $("div").find("table").hide();
+        $("div.col-lg-10 ").hide();
           //alert('#'+$(this).attr('name'));
-          var element='#'+$(this).attr('name')
-          //alert('table'+element);          
-        $('table'+element).toggle();
+          var element='#menu-'+$(this).attr('name')
+          //alert(element);          
+        $(element).toggle();
     });
     });
     

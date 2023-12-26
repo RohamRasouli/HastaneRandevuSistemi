@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 namespace DbAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
     public class DbController : ControllerBase
     {
         //private DbHastaneContext _context;
@@ -17,6 +16,7 @@ namespace DbAPI.Controllers
         //}
 
         [HttpGet]
+        [Route("api/[controller]/[action]/{email},{password}")]
         public async Task<IActionResult> UserLogin(string email,string password)
         {
             var _context = new DbHastaneContext();
@@ -37,8 +37,9 @@ namespace DbAPI.Controllers
             {
                 return BadRequest("Kullanýcý bulunamadý");
             }
-            return Ok(_context.Users.ToList());
+            return Ok(results.ToList());
         }
+        [Route("api/[controller]/[action]")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -47,6 +48,7 @@ namespace DbAPI.Controllers
         }
 
         [HttpPost]
+        [Route("api/[controller]/[action]")]
         public async Task<IActionResult> AddUser(Models.User _user)
         {
             if (_user == null)

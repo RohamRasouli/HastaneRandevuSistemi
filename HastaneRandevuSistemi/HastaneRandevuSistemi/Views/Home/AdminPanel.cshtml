@@ -23,6 +23,7 @@
         }
     </main>
 </div>
+
 <div class="container-fluid" style="min-height: 10rem;">
     <div class="row">
         <div class="col-lg-2">
@@ -41,21 +42,21 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li>
-                        <a href="#" name="our-doctors" class="nav-link side-bar active">
+                        <a href="#" name="our_doctors" class="nav-link side-bar active">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                            Our Doctors
+                            Doktorlar
                         </a>
                     </li>
                     <li>
                         <a href="#" name="appointments" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                            Appointments
+                            Randevular
                         </a>
                     </li>
                     <li>
                         <a href="#" name="users" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                            Users
+                            Kullanıcılar
                         </a>
                     </li>
                 </ul>
@@ -77,22 +78,8 @@
         </div>
 
 
-        <div class="col-lg-10">
-            <!-- <div class="pr-box d-block mt-2 p-2 border border-success rounded" style="background-color: rgb(222, 243, 227);">
-                 <div class="w-25 d-inline-block">
-                     <h6 class="">Ahmet Kaan</h3>
-                 </div>
-                 <div class="w-25 d-inline-block">
-                     <h6 class=""> ahmet.kaan@gmail.com</h3>
-                 </div>
-                 <div class="w-45 d-inline-block">
-                     <a href="" class="btn-details bg-warning text-center" style="width: 50%;">İncele</a>
-                     <a href="" class="btn-details bg-danger text-center" style="width: 5rem;">Sil</a>
-                 </div>
-
-             </div>
-             -->
-            <table id="our-doctors" class="table table-striped admin-table" style="width:100%;">
+        <div id="menu-our_doctors" class="col-lg-10">
+            <table class="table table-striped admin-table" style="width:100%;">
                 <thead>
                     <tr>
                         <th>İsim-Soyisim</th>
@@ -133,13 +120,37 @@
                 </tbody>
             </table>
 
-            <table id="appointments" class="table table-striped admin-table" style="width:100%;display: none;">
+        </div>
+        <div id="menu-appointments" class="col-lg-10" style="display:none">
+            <table class="table table-striped admin-table" style="width:100%">
                 <thead>
                     <tr>
                         <th>İsim-Soyisim</th>
                         <th>Randevu Yeri</th>
                         <th>Doktor</th>
                         <th>Randevu Saati</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Halil Akyıldız</td>
+                        <td>Ortapedi ve Travmatoloji</td>
+                        <td>Tiger Nixon</td>
+                        <td>2011-04-25 12:00</td>
+                        <td><a class="doctor-detay" href="#">Detay</a></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div id="menu-users" class="col-lg-10" style="display:none">
+            <table class="table table-striped admin-table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>İsim-Soyisim</th>
+                        <th>Randevu Yeri</th>
+                        <th>Kullanıcı Tipi</th>
+                        <th>Kayıt Tarihi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -152,12 +163,9 @@
                             <td>@person.LastLoginDate</td>
                         </tr>
                     }
-                    
 
                 </tbody>
             </table>
-
-
         </div>
     </div>
 </div>
@@ -169,7 +177,7 @@
     <h2 class="text-center">Halil Akyıldız</h2>
     <hr>
     <div class="card col-lg-3 col-md-4 col-sm-6 d-inline-block">
-        <img class="card-img-top" src="/img/doctors/d1.jpg" alt="Card image cap">
+        <img class="card-img-top" src="./img/doctors/d1.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Lorem, ipsum dolor.</p>
