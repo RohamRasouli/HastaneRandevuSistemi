@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DbAPI.Models
+﻿namespace HastaneRandevuSistemi.Models
 {
-    public partial class User
+    public class User
     {
         public int UserId { get; set; }
         public string? UserFirstName { get; set; }
@@ -13,6 +10,5 @@ namespace DbAPI.Models
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastLoginDate { get; set; }
         public string? Password { get; set; }
-        public string? PhotoUrl { get; set; }
     }
 }

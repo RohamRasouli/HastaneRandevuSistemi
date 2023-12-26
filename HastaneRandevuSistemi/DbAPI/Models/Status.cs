@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace DbAPI.Models
 {
-    public partial class UserType
+    public partial class Status
     {
-        public int UserTypeId { get; set; }
-        public string? TypeName { get; set; }
+        public int StatuId { get; set; }
+        public string? StatuName { get; set; }
         public DateTime? CreatedDate { get; set; }
     }
 }

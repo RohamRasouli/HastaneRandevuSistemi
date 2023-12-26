@@ -1,3 +1,4 @@
+
 using DbAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,46 +17,46 @@ namespace DbAPI.Controllers
         //}
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers(/*string email,string password*/)
+        public async Task<IActionResult> UserLogin(string email,string password)
         {
-            //            var _context = new DbHastaneContext();
-            //            var results = from user in _context.Users
-            //                          join user_type in _context.UserTypes on user.UserTypeId equals user_type.UserTypeId
-            //                          where user.UserEmail.Equals(email) & user.Password.Equals(password)
-            //                          select new
-            //                          {
-            //                              user.UserFirstName,
-            //                              user.UserSecondName,
-            //                              user.UserEmail,
-            //                              user_type.UserTypeName
-            //                          };
-            //;           if (results == null || results.ToList().Count == 0)
-            //            {
-            //                return BadRequest("Kullanýcý bulunamadý");
-            //            }
+            var _context = new DbHastaneContext();
+            var results = from user in _context.Users
+                          join user_type in _context.UserTypes on user.UserTypeId equals user_type.UserTypeId
+                          where user.UserEmail.Equals(email) & user.Password.Equals(password)
+                          select new
+                          {
+                              user.UserFirstName,
+                              user.UserSecondName,
+                              user.UserEmail,
+                              user.Password,
+                              user.LastLoginDate,
+                              user.CreatedDate,
+                              user_type.TypeName
+                          };
+            if (results == null || results.ToList().Count == 0)
+            {
+                return BadRequest("Kullanýcý bulunamadý");
+            }
+            return Ok(_context.Users.ToList());
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
             var _context = new DbHastaneContext();
             return Ok(_context.Users.ToList());
         }
-        //[HttpGet]
-        //[Route("[action]/{id:int}")]
-        //public async Task<IActionResult> GetUsersById(int id)
-        //{
-        //    //using (var _context = new DbHastaneContext())
-        //    //{
-        //    //    return _context.Users.ToList();
-        //    //}                
-
-        //      var _context = new DbHastaneContext();
-        //      return Ok(await _context.Users.Where(C => C.UserId == id).ToListAsync());
-            
-           
-        //}
 
         [HttpPost]
         public async Task<IActionResult> AddUser(Models.User _user)
         {
             if (_user == null)
-                return BadRequest();
+                return BadRequest("Hata: Kullanýcý null!");
+            else if(_user.UserEmail==null)
+                return BadRequest("Hata: Mail adresi boþ olamaz!");
+            else if (_user.Password == null)
+                return BadRequest("Hata: Parola boþ olamaz!");
+            else if (_user.UserEmail == null || _user.UserSecondName==null)
+                return BadRequest("Hata: Ýsim-Soyisim boþ olamaz!");
 
             var _context = new DbHastaneContext();
             _context.Users.Add(_user);
