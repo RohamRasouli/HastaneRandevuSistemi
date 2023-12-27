@@ -7,9 +7,13 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace HastaneRandevuSistemi.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -28,7 +32,7 @@ namespace HastaneRandevuSistemi.Controllers
             return View();
         }
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminPanel()
         {
             List<User> users = new List<User>();
@@ -56,7 +60,7 @@ namespace HastaneRandevuSistemi.Controllers
             _user.Password = password;
             _user.CreatedDate= DateTime.Now;
             _user.LastLoginDate = null;
-            _user.UserTypeId= 2;
+            _user.TypeName="Kullanıcı"; // veritabanında çekilebilir
             try
             {
                 string data = JsonConvert.SerializeObject(_user);
@@ -76,17 +80,23 @@ namespace HastaneRandevuSistemi.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Kullanıcı, Doktor")]
         public IActionResult UserHome()
         {
             return View();
         }
         [HttpGet]
-        public IActionResult LogIn() 
+        public IActionResult LogIn()
         {
+            ClaimsPrincipal claimUser = HttpContext.User;
+            if (claimUser.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
             return View();
         }
         [HttpPost]
-        public IActionResult LogIn(string email, string password)
+        public async Task<IActionResult> LogIn(string email, string password)
         {
             User _user = new User();
             List<User> users = new List<User>();
@@ -96,9 +106,37 @@ namespace HastaneRandevuSistemi.Controllers
                 var data = response.Content.ReadAsStringAsync().Result;
                 users = JsonConvert.DeserializeObject<List<User>>(data);
                 TempData["email"] = users[0].UserEmail;
-                return RedirectToAction("UserHome");
+
+                // LOGİN
+                List<Claim> claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.NameIdentifier,users[0].UserEmail.ToString()),
+                    new Claim("Yetki",users[0].TypeName.ToString()),
+                    new Claim(ClaimTypes.Role,users[0].TypeName)
+                };
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,                    
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+                AuthenticationProperties properties = new AuthenticationProperties()
+                {
+                    AllowRefresh = true,
+                    IsPersistent = true
+                };
+                
+
+                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity), properties);
+                //var yetki = User.FindAll(ClaimTypes.Role).ToList();
+                return RedirectToAction("AdminPanel", "Home");
             }
+            TempData["message"] = "Kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol ediniz";
             return View();
+        }
+        [HttpGet]
+        public  IActionResult LogOut()
+        {
+             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("LogIn", "Home");
+
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

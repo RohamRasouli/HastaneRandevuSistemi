@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QHTx5CINbcnt1tbin1oY8kHsvgLSByow2i0V08JI4LzK8pnICAQKVugfDL2pCVV1bekv6wjU0Vgfz49bGwZsVg==",
+  "dgSpecHash": "DNsEaar/dCQkP9Y0V9S+hrLx/zh3eYU7uP0eci9UcEVLNl6H7EoGk0JdQek+3pktF/pxLMdIeO+dLUgmdkzwXQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\halil\\OneDrive\\Masaüstü\\Hastana Randevu\\HastaneRandevuSistemi\\HastaneRandevuSistemi\\HastaneRandevuSistemi.csproj",
+  "projectFilePath": "C:\\Users\\halil\\OneDrive\\Masaüstü\\web projesi\\v3\\HastaneRandevuSistemi\\HastaneRandevuSistemi\\HastaneRandevuSistemi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\halil\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
