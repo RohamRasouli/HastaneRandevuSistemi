@@ -87,20 +87,19 @@
                       Kullanıcılar
                     </a>
                   </li>
+                  <li>
+                    <a href="#" name="create_appointments" class="nav-link side-bar link-dark">
+                      <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                      Çalışma Saati Oluştur
+                    </a>
+                  </li>
                 </ul>
                 <hr>
                 <div class="dropdown">
-                  <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>mdo</strong>
+                  <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">                    
+                    <strong>Log Out</strong>
                   </a>
-                  <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                  </ul>
+                 
                 </div>
               </div>    
         </div>
@@ -193,6 +192,40 @@
               </tbody>
             </table> 
             </div>
+            <div id="menu-create_appointments" class="col-lg-10" style="display:none">
+              <form>
+                <div class="form-group w-50">
+                    <label for="MainScienceBranch">Doktor seçiniz:</label>
+                    <select name="MainScienceBranch" class="form-control">
+                      <option value="OrtapediveTravmatoloji">Ahmet</option>
+                      <option value="IcHastaliklari">Mehmet</option>
+                      <option value="Dahiliye">Burak</option>
+                    </select>
+                </div><br>
+                <div class="form-group w-50">
+                  <label for="Policlinic">Poliklinik Seçiniz:</label>
+                    <select name="Policlinic" class="form-control">
+                      <option value="Policlinic1">Poliklinik 1</option>
+                      <option value="Policlinic2">Poliklinik 2</option>
+                      <option value="Policlinic3">Poliklinik 3</option>
+                    </select>
+                </div><br>
+               
+                <div class="form-group w-50">
+                    <label for="birthday">Başlangıç Tarihi:</label>
+                    <input type="date" id="birthday" class="form-control w-50" name="birthday">
+                    <label for="birthday">Başlangıç Saati:</label><br>
+                    <input type="time" id="birthday" class="form-control w-50" name="birthday"><br>
+                 </div>          
+                 <div class="form-group w-50">
+                  <label for="birthday">Bitiş Tarihi:</label>
+                  <input type="date" id="birthday" class="form-control w-50" name="birthday">
+                  <label for="birthday">Bitiş Saati:</label><br>
+                  <input type="time" id="birthday" class="form-control w-50" name="birthday"><br><hr>
+                  <button type="submit" class="btn btn-primary">Oluştur</button>
+               </div>          
+              </form>
+              </div>
     </div>
    </div>
 

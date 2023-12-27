@@ -65,6 +65,47 @@ namespace DbAPI.Controllers
             await _context.SaveChangesAsync();
             return Ok(await _context.Users.ToListAsync());
         }
+        [Route("api/[controller]/[action]")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllDoctors()
+        {
+            var _context = new DbHastaneContext();
+            var results = from user in _context.Users
+                          join user_type in _context.UserTypes on user.UserTypeId equals user_type.UserTypeId
+                          where user.UserTypeId.Equals(3) // doktor tipi
+                          select new
+                          {
+                              user.UserFirstName,
+                              user.UserSecondName,
+                              user.UserEmail,
+                              user.Password,
+                              user.LastLoginDate,
+                              user.CreatedDate,
+                              user_type.TypeName
+                          };
+            if (results == null || results.ToList().Count == 0)
+            {
+                return BadRequest("Veri bulunamadý");
+            }
+            return Ok(results.ToList());
+        }
+        [HttpPost]
+        [Route("api/[controller]/[action]")]
+        public async Task<IActionResult> AddDoctorWorkTime(Models.DoctorWorkTime _workTime)
+        {
+            if (_workTime == null)
+                return BadRequest("Hata: Nesne null!");
+            else if (_workTime.DoctorId == null)
+                return BadRequest("Hata: Doktor boþ olamaz!");
+            else if (_workTime.PoliclinicId == null)
+                return BadRequest("Hata: Poliklinik boþ olamaz!");
+            else if (_workTime.StartDate == null || _workTime.EndDate == null)
+                return BadRequest("Hata: Baþlangýç veya Bitiþ tarihi boþ olamaz!");
 
+            var _context = new DbHastaneContext();
+            _context.DoctorWorkTimes.Add(_workTime);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.DoctorWorkTimes.ToListAsync());
+        }
     }
 }

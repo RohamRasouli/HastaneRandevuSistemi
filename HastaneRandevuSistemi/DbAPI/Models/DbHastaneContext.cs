@@ -17,6 +17,7 @@ namespace DbAPI.Models
         }
 
         public virtual DbSet<Appointment> Appointments { get; set; } = null!;
+        public virtual DbSet<DoctorWorkTime> DoctorWorkTimes { get; set; } = null!;
         public virtual DbSet<DoctorsMainScienceBranch> DoctorsMainScienceBranches { get; set; } = null!;
         public virtual DbSet<MainScienceBranch> MainScienceBranches { get; set; } = null!;
         public virtual DbSet<Policlinic> Policlinics { get; set; } = null!;
@@ -52,6 +53,24 @@ namespace DbAPI.Models
                 entity.Property(e => e.StatuId).HasColumnName("StatuID");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
+            });
+
+            modelBuilder.Entity<DoctorWorkTime>(entity =>
+            {
+                entity.HasKey(e => e.DoctorWorkTimesId)
+                    .HasName("PK__DoctorWo__EBEB41AAA321B274");
+
+                entity.Property(e => e.DoctorWorkTimesId).HasColumnName("DoctorWorkTimesID");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PoliclinicId).HasColumnName("PoliclinicID");
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<DoctorsMainScienceBranch>(entity =>

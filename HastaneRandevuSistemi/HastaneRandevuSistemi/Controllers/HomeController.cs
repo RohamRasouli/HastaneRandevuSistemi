@@ -138,6 +138,36 @@ namespace HastaneRandevuSistemi.Controllers
             return RedirectToAction("LogIn", "Home");
 
         }
+
+        [HttpPost]
+        public IActionResult AddDoctorWorkTime(int doctor, int policlinic,int main_branch,string start_date, string start_time,string end_date,string end_time)
+        {
+            DoctorWorkTime _dwt = new DoctorWorkTime();
+            _dwt.DoctorId = doctor;
+            _dwt.PoliclinicId = policlinic;
+            _dwt.MainBranchId=main_branch;
+            _dwt.StartDate = Convert.ToDateTime(start_date + start_time);
+            _dwt.EndDate = Convert.ToDateTime(end_date + end_time);
+            _dwt.CreatedDate = DateTime.Now;
+            try
+            {
+                string data = JsonConvert.SerializeObject(_dwt);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage responce = _client.PostAsync(_client.BaseAddress + "Db/AddDoctorWorkTime", content).Result;
+
+                if (responce.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "Çalışma saati kaydı başarılı";
+                    return RedirectToAction("AdminPanel");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = "Çalışma saati kaydı başarısız";
+                return View();
+            }
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

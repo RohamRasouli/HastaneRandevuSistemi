@@ -59,13 +59,19 @@
                             Kullanıcılar
                         </a>
                     </li>
+                    <li>
+                        <a href="#" name="create_appointments" class="nav-link side-bar link-dark">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            Çalışma Saati Oluştur
+                        </a>
+                    </li>
                 </ul>
                 <hr>
                 <div class="dropdown">
-                    
-                    <a href="@Url.Action("LogOut", "Home")" class="d-flex align-items-center link-dark text-decoration-none"  aria-expanded="false">
+                    <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         <strong>Log Out</strong>
                     </a>
+
                 </div>
             </div>
         </div>
@@ -147,18 +153,57 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var person in ViewBag.data)
-                    {
-                        <tr>
-                            <td>@person.UserFirstName @person.UserSecondName</td>
-                            <td>@person.UserEmail</td>
-                            <td>@person.CreatedDate</td>
-                            <td>@person.LastLoginDate</td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>Halil Akyıldız</td>
+                        <td>Ortapedi ve Travmatoloji</td>
+                        <td>Kullanıcı</td>
+                        <td>2011-04-25 12:00</td>
+                        <td><a class="doctor-detay" href="#">Detay</a></td>
+                    </tr>
 
                 </tbody>
             </table>
+        </div>
+        <div id="menu-create_appointments" class="col-lg-10" style="display:none">
+            <form action="/Home/AddDoctorWorkTime" method="post">
+                <div class="form-group w-50">
+                    <label for="MainScienceBranch">Doktor seçiniz:</label>
+                    <select name="doctor" class="form-control">
+                        <option value="Ahmet">Ahmet</option>
+                        <option value="Mehmet">Mehmet</option>
+                        <option value="Burak">Burak</option>
+                    </select>
+                </div><br>
+                <div class="form-group w-50">
+                    <label for="Policlinic">Poliklinik Seçiniz:</label>
+                    <select name="policlinic" class="form-control">
+                        <option value="Policlinic1">Poliklinik 1</option>
+                        <option value="Policlinic2">Poliklinik 2</option>
+                        <option value="Policlinic3">Poliklinik 3</option>
+                    </select>
+                </div><br>
+                <div class="form-group w-50">
+                    <label for="MainBranch">Poliklinik Seçiniz:</label>
+                    <select name="main_branch" class="form-control">
+                        <option value="Ortapedi">Ortapedi</option>
+                        <option value="Dahiliye">Dahiliye</option>
+                        <option value="Kulak Burun Boğaz">Kulak Burun Boğaz</option>
+                    </select>
+                </div><br>
+                <div class="form-group w-50">
+                    <label for="birthday">Başlangıç Tarihi:</label>
+                    <input type="date" id="birthday" class="form-control w-50" name="start_date">
+                    <label for="birthday">Başlangıç Saati:</label><br>
+                    <input type="time" id="birthday" class="form-control w-50" name="start_time"><br>
+                </div>
+                <div class="form-group w-50">
+                    <label for="birthday">Bitiş Tarihi:</label>
+                    <input type="date" id="birthday" class="form-control w-50" name="end_date">
+                    <label for="birthday">Bitiş Saati:</label><br>
+                    <input type="time" id="birthday" class="form-control w-50" name="end_time"><br><hr>
+                    <button type="submit" class="btn btn-primary">Oluştur</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
