@@ -1,4 +1,4 @@
-﻿using HastaneRandevuSistemi.Models;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -10,10 +10,14 @@ using System.Xml.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using HastaneRandevuSistemi.Models;
+using Newtonsoft.Json.Linq;
+using HastaneRandevuSistemi.Models.ReturnClass;
+using HastaneRandevuSistemi.Models.AddClass;
 
 namespace HastaneRandevuSistemi.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -35,19 +39,60 @@ namespace HastaneRandevuSistemi.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult AdminPanel()
         {
-            List<User> users = new List<User>();
+            // GetAllUsers
+            List<AllUsersInfo> users = new List<AllUsersInfo>();
             var response = _client.GetAsync(_client.BaseAddress + "Db/GetAllUsers").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
-                users = JsonConvert.DeserializeObject<List<User>>(data);
+                users = JsonConvert.DeserializeObject<List<AllUsersInfo>>(data);
             }
-            ViewBag.data = users;
+            ViewBag.users = users;
+
+            List<AllUsersInfo> doctors = new List<AllUsersInfo>();
+            var response_2 = _client.GetAsync(_client.BaseAddress + "Db/GetAllDoctors").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response_2.Content.ReadAsStringAsync().Result;
+                doctors = JsonConvert.DeserializeObject<List<AllUsersInfo>>(data);
+            }
+            ViewBag.doctors = doctors;
+
+            List<AllWorkTimes> _wt = new List<AllWorkTimes>();
+            var response_3 = _client.GetAsync(_client.BaseAddress + "Db/GetAllWorkTimes").Result;
+            
+            if (response_3.IsSuccessStatusCode)
+            {
+                var data = response_3.Content.ReadAsStringAsync().Result;
+                _wt = JsonConvert.DeserializeObject<List<AllWorkTimes>>(data);
+            }
+            ViewBag.workTimes = _wt;
+
+            List<AllScienceBranchs> branchs = new List<AllScienceBranchs>();
+            var response_4 = _client.GetAsync(_client.BaseAddress + "Db/GetAllBranchs").Result;
+            if (response_4.IsSuccessStatusCode)
+            {
+                var data = response_4.Content.ReadAsStringAsync().Result;
+                branchs = JsonConvert.DeserializeObject<List<AllScienceBranchs>>(data);
+            }
+            ViewBag.branchs = branchs;
+
+            List<AllPoliclinics> policlinics = new List<AllPoliclinics>();
+            var response_5 = _client.GetAsync(_client.BaseAddress + "Db/GetAllPoliclinics").Result;
+
+            if (response_5.IsSuccessStatusCode)
+            {
+                var data = response_5.Content.ReadAsStringAsync().Result;
+                policlinics = JsonConvert.DeserializeObject<List<AllPoliclinics>>(data);
+            }
+            ViewBag.policlinics = policlinics;
+
             return View();
         }
         [HttpGet]
         public IActionResult SignIn()
         {
+
             return View();
         }
         [HttpPost]
@@ -58,9 +103,9 @@ namespace HastaneRandevuSistemi.Controllers
             _user.UserSecondName = sname;
             _user.UserEmail = email;
             _user.Password = password;
-            _user.CreatedDate= DateTime.Now;
+            _user.CreatedDate = DateTime.Now;
             _user.LastLoginDate = null;
-            _user.TypeName="Kullanıcı"; // veritabanında çekilebilir
+            _user.UserTypeId = 2; // default 2 atanır
             try
             {
                 string data = JsonConvert.SerializeObject(_user);
@@ -69,13 +114,13 @@ namespace HastaneRandevuSistemi.Controllers
 
                 if (responce.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "Kullanıcı kaydı başarılı";
-                    return RedirectToAction("AdminPanel");
+                    ViewBag.Message = "Kullanıcı kaydı başarılı";
+                    return View();
                 }
             }
             catch (Exception ex)
             {
-                TempData["errorMessage"] = "Kullanıcı kaydı başarısız";
+                ViewBag.Message = "Kullanıcı kaydı başarısız!!";
                 return View();
             }
             return View();
@@ -98,13 +143,13 @@ namespace HastaneRandevuSistemi.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn(string email, string password)
         {
-            User _user = new User();
-            List<User> users = new List<User>();
-            var response = _client.GetAsync(_client.BaseAddress + "Db/UserLogin/"+email.ToString()+","+password.ToString()).Result;
+            AllUsersInfo _user = new AllUsersInfo();
+            List<AllUsersInfo> users = new List<AllUsersInfo>();
+            var response = _client.GetAsync(_client.BaseAddress + "Db/UserLogin/" + email.ToString() + "," + password.ToString()).Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
-                users = JsonConvert.DeserializeObject<List<User>>(data);
+                users = JsonConvert.DeserializeObject<List<AllUsersInfo>>(data);
                 TempData["email"] = users[0].UserEmail;
 
                 // LOGİN
@@ -114,17 +159,17 @@ namespace HastaneRandevuSistemi.Controllers
                     new Claim("Yetki",users[0].TypeName.ToString()),
                     new Claim(ClaimTypes.Role,users[0].TypeName)
                 };
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,                    
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,
                     CookieAuthenticationDefaults.AuthenticationScheme);
                 AuthenticationProperties properties = new AuthenticationProperties()
                 {
                     AllowRefresh = true,
                     IsPersistent = true
                 };
-                
 
-                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity), properties);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                   new ClaimsPrincipal(claimsIdentity), properties);
                 //var yetki = User.FindAll(ClaimTypes.Role).ToList();
                 return RedirectToAction("AdminPanel", "Home");
             }
@@ -145,9 +190,9 @@ namespace HastaneRandevuSistemi.Controllers
             DoctorWorkTime _dwt = new DoctorWorkTime();
             _dwt.DoctorId = doctor;
             _dwt.PoliclinicId = policlinic;
-            _dwt.MainBranchId=main_branch;
-            _dwt.StartDate = Convert.ToDateTime(start_date + start_time);
-            _dwt.EndDate = Convert.ToDateTime(end_date + end_time);
+            _dwt.MainBranchId = main_branch;
+            _dwt.StartDate = Convert.ToDateTime(start_date +" " +start_time+":00.000");
+            _dwt.EndDate = Convert.ToDateTime(end_date +" " + end_time+":00.000");
             _dwt.CreatedDate = DateTime.Now;
             try
             {
@@ -168,10 +213,25 @@ namespace HastaneRandevuSistemi.Controllers
             }
             return View();
         }
+
+        public IActionResult GetAllWorkTimes() 
+        {
+            List<AllWorkTimes> _wt = new List<AllWorkTimes>();
+            var response = _client.GetAsync(_client.BaseAddress + "Db/GetAllWorkTimes").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsStringAsync().Result;
+                _wt = JsonConvert.DeserializeObject<List<AllWorkTimes>>(data);
+            }
+            ViewBag.data = _wt;
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return null;
         }
     }
 }

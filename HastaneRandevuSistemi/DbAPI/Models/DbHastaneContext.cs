@@ -58,17 +58,15 @@ namespace DbAPI.Models
             modelBuilder.Entity<DoctorWorkTime>(entity =>
             {
                 entity.HasKey(e => e.DoctorWorkTimesId)
-                    .HasName("PK__DoctorWo__EBEB41AAA321B274");
+                    .HasName("PK__DoctorWo__EBEB418A299A9D9B");
 
-                entity.Property(e => e.DoctorWorkTimesId).HasColumnName("DoctorWorkTimesID");
+                entity.ToTable("DoctorWorkTime");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
-
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
-                entity.Property(e => e.PoliclinicId).HasColumnName("PoliclinicID");
+                entity.Property(e => e.MainBranchId).HasColumnName("MainBranchID");
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
             });
@@ -76,7 +74,7 @@ namespace DbAPI.Models
             modelBuilder.Entity<DoctorsMainScienceBranch>(entity =>
             {
                 entity.HasKey(e => e.DoctorScienceId)
-                    .HasName("PK__DoctorsM__21866EFE6584999B");
+                    .HasName("PK__DoctorsM__21866EFE1CFA0F09");
 
                 entity.ToTable("DoctorsMainScienceBranch");
 
@@ -92,7 +90,7 @@ namespace DbAPI.Models
             modelBuilder.Entity<MainScienceBranch>(entity =>
             {
                 entity.HasKey(e => e.MainScienceBranchıd)
-                    .HasName("PK__MainScie__1F92762D0294CF20");
+                    .HasName("PK__MainScie__1F92762D74FCB6ED");
 
                 entity.ToTable("MainScienceBranch");
 
@@ -117,7 +115,7 @@ namespace DbAPI.Models
             modelBuilder.Entity<Status>(entity =>
             {
                 entity.HasKey(e => e.StatuId)
-                    .HasName("PK__Status__C7DB7B79A5075D7D");
+                    .HasName("PK__Status__C7DB7B799DACEE17");
 
                 entity.ToTable("Status");
 

@@ -1,28 +1,7 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Admin Panel";
 }
-<div class="container">
-    <main role="main" class="pb-3">
-        @{
-            var errorMessage = TempData["errorMessage"]?.ToString();
-            var successMessage = TempData["successMessage"]?.ToString();
-        }
-        @if (!string.IsNullOrWhiteSpace(successMessage))
-        {
-            <div class="alert alert-success">
-                <b>Success :</b>@successMessage
-                <button type="button" class="btn-close float-end" date-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        }
-        else if (!string.IsNullOrWhiteSpace(errorMessage))
-        {
-            <div class="alert alert-danger">
-                <b>Error :</b>@successMessage
-                <button type="button" class="btn-close float-end" date-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        }
-    </main>
-</div>
 
 <div class="container-fluid" style="min-height: 10rem;">
     <div class="row">
@@ -60,6 +39,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="#" name="work_times" class="nav-link side-bar link-dark">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            Çalışma Saatleri
+                        </a>
+                    </li>
+                    <li>
                         <a href="#" name="create_appointments" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                             Çalışma Saati Oluştur
@@ -68,7 +53,7 @@
                 </ul>
                 <hr>
                 <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="@Url.Action("LogOut", "Home")" class="d-flex align-items-center link-dark text-decoration-none" aria-expanded="false">
                         <strong>Log Out</strong>
                     </a>
 
@@ -82,40 +67,23 @@
                 <thead>
                     <tr>
                         <th>İsim-Soyisim</th>
-                        <th>Branş</th>
-                        <th>Yaş</th>
-                        <th>Başlama Tarihi</th>
+                        <th>Email</th>
+                        <th>Parola</th>
+                        <th>Oluşturma Tarihi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>Ortapedi ve Travmatoloji</td>
-                        <td>61</td>
-                        <td>2011-04-25</td>
-                        <td><a class="doctor-detay" href="#">Detay</a></td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Üroloji</td>
-                        <td>63</td>
-                        <td>2011-07-25</td>
-                        <td><a class="doctor-detay" href="#">Detay</a></td>
-                    </tr>
-                    <tr>
-                        <td>Ashton Cox</td>
-                        <td>Beyin Cerrahı</td>
-                        <td>66</td>
-                        <td>2009-01-12</td>
-                        <td><a class="doctor-detay" href="#">Detay</a></td>
-                    </tr>
-                    <tr>
-                        <td>Cedric Kelly</td>
-                        <td>Kalp cerrahı</td>
-                        <td>22</td>
-                        <td>2012-03-29</td>
-                        <td><a class="doctor-detay" href="#">Detay</a></td>
-                    </tr>
+
+                    @foreach (var user in (@ViewBag.doctors as ICollection<AllUsersInfo>))
+                    {
+                        <tr>
+                            <td>@user.UserFirstName+ @user.UserSecondName</td>
+                            <td>@user.UserEmail</td>
+                            <td>@user.Password</td>
+                            <td>@user.CreatedDate</td>
+                        </tr>
+                    }
+
                 </tbody>
             </table>
 
@@ -142,24 +110,61 @@
                 </tbody>
             </table>
         </div>
+        <div id="menu-work_times" class="col-lg-10" style="display:none">
+            <table class="table table-striped admin-table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Doktor</th>
+                        <th>Poliklinik</th>
+                        <th>Ana Dal</th>
+                        <th>Çalışma Başlangıç</th>
+                        <th>Çalışma Bitiş</th>
+                        <th>Oluşturma Tarihi</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var time in (@ViewBag.workTimes as ICollection<AllWorkTimes>))
+                    {
+                        <tr>
+                            <td>@time.UserFirstName @time.UserSecondName</td>
+                            <td>@time.PoliclinicName</td>
+                            <td>@time.ScienceName</td>
+                            <td>@time.StartDate</td>
+                            <td>@time.EndDate</td>
+                            <td>@time.CreatedDate</td>
+                        </tr>
+                        }                                        
+                    
+
+                </tbody>
+            </table>
+        </div>
         <div id="menu-users" class="col-lg-10" style="display:none">
             <table class="table table-striped admin-table" style="width:100%">
                 <thead>
                     <tr>
                         <th>İsim-Soyisim</th>
-                        <th>Randevu Yeri</th>
+                        <th>Email</th>
                         <th>Kullanıcı Tipi</th>
+                        <th>Parola</th>
+                        <th>Son Giriş Tarihi</th>
                         <th>Kayıt Tarihi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Halil Akyıldız</td>
-                        <td>Ortapedi ve Travmatoloji</td>
-                        <td>Kullanıcı</td>
-                        <td>2011-04-25 12:00</td>
-                        <td><a class="doctor-detay" href="#">Detay</a></td>
-                    </tr>
+
+                    @foreach (var user in (@ViewBag.users as ICollection<AllUsersInfo>))
+                    {
+                        <tr>
+                            <td>@user.UserFirstName @user.UserSecondName</td>
+                            <td>@user.UserEmail</td>
+                            <td>@user.TypeName</td>
+                            <td>@user.Password</td>
+                            <td>@user.LastLoginDate</td>
+                            <td>@user.CreatedDate</td>
+                        </tr>
+                    }
 
                 </tbody>
             </table>
@@ -169,25 +174,30 @@
                 <div class="form-group w-50">
                     <label for="MainScienceBranch">Doktor seçiniz:</label>
                     <select name="doctor" class="form-control">
-                        <option value="Ahmet">Ahmet</option>
-                        <option value="Mehmet">Mehmet</option>
-                        <option value="Burak">Burak</option>
+                        @foreach (var doctor in (@ViewBag.doctors as ICollection<AllUsersInfo>))
+                        {
+                            <option value="@doctor.UserId">@doctor.UserFirstName @doctor.UserSecondName</option>                            
+                        }
                     </select>
                 </div><br>
                 <div class="form-group w-50">
                     <label for="Policlinic">Poliklinik Seçiniz:</label>
                     <select name="policlinic" class="form-control">
-                        <option value="Policlinic1">Poliklinik 1</option>
-                        <option value="Policlinic2">Poliklinik 2</option>
-                        <option value="Policlinic3">Poliklinik 3</option>
+
+                        @foreach (var policlinic in (@ViewBag.policlinics as ICollection<AllPoliclinics>))
+                        {
+                            <option value="@policlinic.PoliclinicId">@policlinic.PoliclinicName</option>
+                        }
                     </select>
                 </div><br>
                 <div class="form-group w-50">
                     <label for="MainBranch">Poliklinik Seçiniz:</label>
                     <select name="main_branch" class="form-control">
-                        <option value="Ortapedi">Ortapedi</option>
-                        <option value="Dahiliye">Dahiliye</option>
-                        <option value="Kulak Burun Boğaz">Kulak Burun Boğaz</option>
+
+                        @foreach (var branchs in (@ViewBag.branchs as ICollection<AllScienceBranchs>))
+                        {
+                            <option value="@branchs.MainScienceBranchıd">@branchs.ScienceName</option>
+                        }
                     </select>
                 </div><br>
                 <div class="form-group w-50">

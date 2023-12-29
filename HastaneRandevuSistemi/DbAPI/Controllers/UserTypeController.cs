@@ -25,7 +25,6 @@ namespace DbAPI.Controllers
                 return Ok(await _context.UserTypes.ToListAsync());
             }
             return BadRequest();
-            return null;
         }
         [HttpGet]
         [Route("[action]/{id:int}")]
@@ -34,7 +33,7 @@ namespace DbAPI.Controllers
             //using (var _context = new DbHastaneContext())
             //{
             //    return _context.Users.ToList();
-            //}                
+            //}
 
             var _context = new DbHastaneContext();
             if (_context != null)
@@ -42,7 +41,6 @@ namespace DbAPI.Controllers
                 return Ok(await _context.UserTypes.Where(C => C.UserTypeId == id).ToListAsync());
             }
             return BadRequest();
-            return null;
         }
         
     }
