@@ -48,43 +48,47 @@
                     <a href="@Url.Action("LogOut", "Home")" class="d-flex align-items-center link-dark text-decoration-none" aria-expanded="false">
                         <strong>Log Out</strong>
                     </a>
-                    
+
                 </div>
             </div>
         </div>
 
         <div id="menu-make_appointments" class="col-lg-10 bg-light" style="display:none;">
-            <form>
+            <form action="/User/MakeAppointment" method="post">
                 <div class="form-group w-50">
                     <label for="MainScienceBranch">Ana Bilim Dalı Seçiniz:</label>
-                    <select name="MainScienceBranch" class="form-control">
-                        <option value="OrtapediveTravmatoloji">Ortapedi ve Travmatoloji</option>
-                        <option value="IcHastaliklari">İç Hastalıkları</option>
-                        <option value="Dahiliye">Dahiliye</option>
+                    <select name="main_branch" class="form-control">
+                        @foreach (var branchs in (@ViewBag.branchs as ICollection<AllScienceBranchs>))
+                        {
+                            <option value="@branchs.MainScienceBranchıd">@branchs.ScienceName</option>
+                        }
+
                     </select>
                 </div><br>
                 <div class="form-group w-50">
                     <label for="Policlinic">Poliklinik Seçiniz:</label>
-                    <select name="Policlinic" class="form-control">
-                        <option value="Policlinic1">Poliklinik 1</option>
-                        <option value="Policlinic2">Poliklinik 2</option>
-                        <option value="Policlinic3">Poliklinik 3</option>
+                    <select name="policlinic" class="form-control">
+                        @foreach (var policlinic in (@ViewBag.policlinics as ICollection<AllPoliclinics>))
+                        {
+                            <option value="@policlinic.PoliclinicId">@policlinic.PoliclinicName</option>
+                        }
                     </select>
                 </div><br>
                 <div class="form-group w-50">
                     <label for="Doctors">Doktor seçiniz:</label>
-                    <select name="Doctors" class="form-control">
-                        <option value="Policlinic1">ahmet</option>
-                        <option value="Policlinic2">mehmet</option>
-                        <option value="Policlinic3">ali</option>
+                    <select name="doctor" class="form-control">
+                        @foreach (var doctor in (@ViewBag.doctors as ICollection<AllUsersInfo>))
+                        {
+                            <option value="@doctor.UserId">@doctor.UserFirstName @doctor.UserSecondName</option>
+                        }
                     </select>
                 </div>
                 <br>
                 <div class="form-group w-50">
                     <label for="birthday">Date:</label>
-                    <input type="date" id="birthday" class="form-control w-50" name="birthday">
+                    <input type="date" id="birthday" class="form-control w-50" name="date">
                     <label for="birthday">Time:</label><br>
-                    <input type="time" id="birthday" class="form-control w-50" name="birthday"><br><hr>
+                    <input type="time" id="birthday" class="form-control w-50" name="time"><br><hr>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
@@ -117,15 +121,20 @@
                         <th>Randevu Yeri</th>
                         <th>Doktor</th>
                         <th>Randevu Saati</th>
+                        <th>Alındığı Tarih</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Halil Akyıldız</td>
-                        <td>Ortapedi ve Travmatoloji</td>
-                        <td>Tiger Nixon</td>
-                        <td>2011-04-25 12:00</td>
-                    </tr>
+                    @foreach (var appointment in (@ViewBag.appointments as ICollection<AllAppointments>))
+                    {
+                        <tr>
+                            <td>@appointment.UserFirstName @appointment.UserSecondName</td>
+                            <td>@appointment.PoliclinicName</td>
+                            <td>@appointment.doctorFirstName @appointment.doctorSecondName</td>
+                            <td>@appointment.AppointmentDate</td>
+                            <td>@appointment.CreatetDate</td>
+                        </tr>
+                    }
 
                 </tbody>
             </table>

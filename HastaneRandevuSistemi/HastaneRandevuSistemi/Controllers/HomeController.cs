@@ -51,7 +51,7 @@ namespace HastaneRandevuSistemi.Controllers
 
             List<AllUsersInfo> doctors = new List<AllUsersInfo>();
             var response_2 = _client.GetAsync(_client.BaseAddress + "Db/GetAllDoctors").Result;
-            if (response.IsSuccessStatusCode)
+            if (response_2.IsSuccessStatusCode)
             {
                 var data = response_2.Content.ReadAsStringAsync().Result;
                 doctors = JsonConvert.DeserializeObject<List<AllUsersInfo>>(data);
@@ -79,7 +79,6 @@ namespace HastaneRandevuSistemi.Controllers
 
             List<AllPoliclinics> policlinics = new List<AllPoliclinics>();
             var response_5 = _client.GetAsync(_client.BaseAddress + "Db/GetAllPoliclinics").Result;
-
             if (response_5.IsSuccessStatusCode)
             {
                 var data = response_5.Content.ReadAsStringAsync().Result;
@@ -126,12 +125,7 @@ namespace HastaneRandevuSistemi.Controllers
             return View();
         }
 
-        [HttpGet]
-        [Authorize(Roles = "Kullanıcı, Doktor")]
-        public IActionResult UserHome()
-        {
-            return View();
-        }
+       
         [HttpGet]
         public IActionResult LogIn()
         {
@@ -156,7 +150,7 @@ namespace HastaneRandevuSistemi.Controllers
                 List<Claim> claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.NameIdentifier,users[0].UserEmail.ToString()),
-                    new Claim("Yetki",users[0].TypeName.ToString()),
+                    new Claim(ClaimTypes.Sid, users[0].UserId.ToString()),
                     new Claim(ClaimTypes.Role,users[0].TypeName)
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,
@@ -171,7 +165,16 @@ namespace HastaneRandevuSistemi.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                    new ClaimsPrincipal(claimsIdentity), properties);
                 //var yetki = User.FindAll(ClaimTypes.Role).ToList();
-                return RedirectToAction("AdminPanel", "Home");
+
+                var userIdentity = (ClaimsIdentity)User.Identity;
+                var claims_ = userIdentity.Claims;
+                var roleClaimType = userIdentity.RoleClaimType;
+                var roles = claims.Where(c => c.Type == ClaimTypes.Role).ToList();
+               
+                if (roles.First().Value.Equals("Admin"))
+                    return RedirectToAction("AdminPanel", "Home");
+                else
+                    return RedirectToAction("UserHome", "User");
             }
             TempData["message"] = "Kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol ediniz";
             return View();

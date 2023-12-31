@@ -26,6 +26,7 @@ namespace DbAPI.Controllers
                           where user.UserEmail.Equals(email) & user.Password.Equals(password)
                           select new
                           {
+                              user.UserId,
                               user.UserFirstName,
                               user.UserSecondName,
                               user.UserEmail,
@@ -188,6 +189,77 @@ namespace DbAPI.Controllers
             if (results == null || results.ToList().Count == 0)
             {
                 return BadRequest("Veri bulunamadý");
+            }
+            return Ok(results.ToList());
+        }
+
+        [HttpPost]
+        [Route("api/[controller]/[action]")]
+        public async Task<IActionResult> AddAppointment(Models.Appointment _appointment)
+        {
+            if (_appointment == null)
+                return BadRequest("Hata: Nesne null!");
+            else if (_appointment.DoctorId == null)
+                return BadRequest("Hata: Doktor boþ olamaz!");
+            else if (_appointment.PoliclinicId == null)
+                return BadRequest("Hata: Poliklinik boþ olamaz!");
+            else if (_appointment.AppointmentDate == null)
+                return BadRequest("Hata: Randevu tarihi boþ olamaz!");
+
+            var _context = new DbHastaneContext();
+            _context.Appointments.Add(_appointment);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.DoctorWorkTimes.ToListAsync());
+        }
+        [HttpGet]
+        [Route("api/[controller]/[action]")]
+        public async Task<IActionResult> GetAllAppointment()
+        {
+            var _context = new DbHastaneContext();
+            var results = from appointment in _context.Appointments
+                          join user in _context.Users on appointment.DoctorId equals user.UserId
+                          join mainBranch in _context.MainScienceBranches on appointment.MainScienceBranchId equals mainBranch.MainScienceBranchýd
+                          join policlinic in _context.Policlinics on appointment.PoliclinicId equals policlinic.PoliclinicId
+                          select new
+                          {
+                              user.UserFirstName,
+                              user.UserSecondName,
+                              policlinic.PoliclinicName,
+                              mainBranch.ScienceName,
+                              appointment.AppointmentDate,
+                              appointment.CreatetDate,
+                          };
+            if (results == null || results.ToList().Count == 0)
+            {
+                return BadRequest("Veri bulunamadý");
+            }
+            return Ok(results.ToList());
+        }
+        [HttpGet]
+        [Route("api/[controller]/[action]/{user_id}")]
+        public async Task<IActionResult> GetUserAppointment(int user_id)
+        {
+            var _context = new DbHastaneContext();
+            var results = from appointment in _context.Appointments
+                          join user in _context.Users on appointment.UserId equals user.UserId
+                          join doctor in _context.Users on appointment.DoctorId equals doctor.UserId
+                          join mainBranch in _context.MainScienceBranches on appointment.MainScienceBranchId equals mainBranch.MainScienceBranchýd
+                          join policlinic in _context.Policlinics on appointment.PoliclinicId equals policlinic.PoliclinicId
+                          where appointment.UserId.Equals(user_id)
+                          select new
+                          {
+                              user.UserFirstName,
+                              user.UserSecondName,
+                              doctorFirstName = doctor.UserFirstName,
+                              doctorSecondName = doctor.UserSecondName,
+                              policlinic.PoliclinicName,
+                              mainBranch.ScienceName,
+                              appointment.AppointmentDate,
+                              appointment.CreatetDate,
+                          };
+            if (results == null || results.ToList().Count == 0)
+            {
+                return BadRequest("Kullanýcý bulunamadý");
             }
             return Ok(results.ToList());
         }
