@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="row" style="margin-top: 3rem;">
-        <h2 id="our-doctors" style="text-align: center;">OUR DOCTORS</h2>
+        <h2 id="our-doctors" style="text-align: center;">@_localization.GetKey("OurDoctors").Value</h2>
         <hr>
         <div class="card col-lg-3 col-md-4 col-sm-6">
             <img class="card-img-top" src="./img/doctors/d1.jpg" alt="Card image cap">
@@ -114,20 +114,20 @@
         <div class="row w-100 col-lg-12 col-md-6 col-sm-3">
             <form>
                 <fieldset disabled>
-                    <legend>Contac Us</legend>
+                    <legend>@_localization.GetKey("Contact").Value</legend>
                     <div class="mb-3">
-                        <label class="form-label">Name-Surname</label>
+                        <label class="form-label">@_localization.GetKey("NameSurname").Value</label>
                         <input type="text" id="name-Surname" class="form-control" placeholder="Name-Surname">
                     </div>
                     <div class="mb-3">
-                        <label for="disabledTextInput" class="form-label">E-Mail</label>
+                        <label for="disabledTextInput" class="form-label">@_localization.GetKey("Email").Value</label>
                         <input type="email" id="email" class="form-control" placeholder="E-Mail">
                     </div>
                     <div class="mb-3">
-                        <label for="disabledTextInput" class="form-label">Message</label>
+                        <label for="disabledTextInput" class="form-label">@_localization.GetKey("Message").Value</label>
                         <textarea class="form-control" rows="5" id="message"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">@_localization.GetKey("Submit").Value</button>
                 </fieldset>
             </form>
         </div>

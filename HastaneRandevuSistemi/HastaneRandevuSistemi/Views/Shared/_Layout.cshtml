@@ -22,18 +22,33 @@
 
 </head>
 <body>
+        <ul  class='nav' style="position:fixed; top:10rem;right:0;">
+            <li>
+                <div class="dropdown">
+                <a class="dropdown-toggle btn btn-light" data-toggle="dropdown" href="#">Language</a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US">En</a></li>
+                    <li><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="tr-TR">Tr</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+    
   <nav class="navbar bg-primary navbar-dark navbar-expand-sm my-3 shadow-lg">
     <div class="container">
-      <a href="#" class="navbar-brand">My Hospital</a>
+      <a href="#" class="navbar-brand">@_localization.GetKey("NavTitle").Value</a>
       <div class="nav-links">
         <ul class="nav-link-item">
-          <li><a href="#our-doctors">Our doctors</a></li>
-          <li><a href="">About Us</a></li>
-          <li><a href="#contact-us">Contac</a></li>
-                    <li class="border rounded user-in"><a href="@Url.Action("SignIn", "Home")">Sign In</a></li>
+                    <li><a href="#our-doctors">@_localization.GetKey("OurDoctors").Value</a></li>
+                    <li><a href="">@_localization.GetKey("AboutUs").Value</a></li>
+                    <li><a href="#contact-us">@_localization.GetKey("Contact").Value</a></li>
+
+                    <li class="border rounded user-in"><a href="@Url.Action("SignIn", "Home")">@_localization.GetKey("SignIn").Value</a></li>
                     @if (!User.Identity.IsAuthenticated)
                     {
-                        <li class="border rounded user-in"><a href="@Url.Action("LogIn", "Home")">Log In</a></li>
+                        <li class="border rounded user-in"><a href="@Url.Action("LogIn", "Home")">@_localization.GetKey("LogIn").Value</a></li>
                     }
                     
                     

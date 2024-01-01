@@ -3,8 +3,13 @@
     margin: 0;
     box-sizing: border-box;    
 }
-
-.nav-link-item{
+#btn-language{
+    background-color:red;
+    position:fixed;
+    top:1rem;
+    left:1rem;
+}
+.nav-link-item {
     text-decoration: none;
 }
 .hamburger-button{

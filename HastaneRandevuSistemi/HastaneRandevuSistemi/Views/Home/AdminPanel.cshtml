@@ -6,55 +6,66 @@
 <div class="container-fluid" style="min-height: 10rem;">
     <div class="row">
         <div class="col-lg-2">
-            <!--
-            <ul class="drop-down" style="display: block;">
-                <li><a href="">Kullanıcılar</a></li>
-                <li><a href="">Randevular</a></li>
-                <li><a href="">Personeller</a></li>
-                <li><a href="">Ana Sayfa Slider</a></li>
-              </ul>         -->
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-light">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                    <span class="fs-4">Menu</span>
+                    <span class="fs-4">@_localization.GetKey("Menu").Value</span>
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li>
                         <a href="#" name="our_doctors" class="nav-link side-bar active">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                            Doktorlar
+                            @_localization.GetKey("OurDoctors").Value
                         </a>
                     </li>
                     <li>
                         <a href="#" name="appointments" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                            Randevular
+                            @_localization.GetKey("Appointments").Value
                         </a>
                     </li>
                     <li>
                         <a href="#" name="users" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                            Kullanıcılar
+                            @_localization.GetKey("Users").Value
                         </a>
                     </li>
                     <li>
                         <a href="#" name="work_times" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                            Çalışma Saatleri
+                            @_localization.GetKey("WorkingTime").Value
                         </a>
                     </li>
                     <li>
                         <a href="#" name="create_appointments" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                            Çalışma Saati Oluştur
+                            @_localization.GetKey("CreateWorkingTime").Value
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" name="add_doctor" class="nav-link side-bar link-dark">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            @_localization.GetKey("AddDoctor").Value
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" name="add_main_branch" class="nav-link side-bar link-dark">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            @_localization.GetKey("AddMainScienceBranch").Value
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" name="add_policlinic" class="nav-link side-bar link-dark">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            @_localization.GetKey("AddPoliclinic").Value
                         </a>
                     </li>
                 </ul>
                 <hr>
                 <div class="dropdown">
                     <a href="@Url.Action("LogOut", "Home")" class="d-flex align-items-center link-dark text-decoration-none" aria-expanded="false">
-                        <strong>Log Out</strong>
+                        <strong>@_localization.GetKey("LogOut").Value</strong>
                     </a>
 
                 </div>
@@ -66,10 +77,10 @@
             <table class="table table-striped admin-table" style="width:100%;">
                 <thead>
                     <tr>
-                        <th>İsim-Soyisim</th>
-                        <th>Email</th>
-                        <th>Parola</th>
-                        <th>Oluşturma Tarihi</th>
+                        <th>@_localization.GetKey("NameSurname").Value</th>
+                        <th>@_localization.GetKey("Email").Value</th>
+                        <th>@_localization.GetKey("Password").Value</th>
+                        <th>@_localization.GetKey("CreatedDate").Value</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,10 +103,10 @@
             <table class="table table-striped admin-table" style="width:100%">
                 <thead>
                     <tr>
-                        <th>İsim-Soyisim</th>
-                        <th>Randevu Yeri</th>
-                        <th>Doktor</th>
-                        <th>Randevu Saati</th>
+                        <th>@_localization.GetKey("NameSurname").Value</th>
+                        <th>@_localization.GetKey("AppointmentPlace").Value</th>
+                        <th>@_localization.GetKey("Doctor").Value</th>
+                        <th>@_localization.GetKey("AppointmentDate").Value</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -114,12 +125,12 @@
             <table class="table table-striped admin-table" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Doktor</th>
-                        <th>Poliklinik</th>
-                        <th>Ana Dal</th>
-                        <th>Çalışma Başlangıç</th>
-                        <th>Çalışma Bitiş</th>
-                        <th>Oluşturma Tarihi</th>
+                        <th>@_localization.GetKey("Doctor").Value</th>
+                        <th>@_localization.GetKey("Policlinic").Value</th>
+                        <th>@_localization.GetKey("MainScienceBranch").Value</th>
+                        <th>@_localization.GetKey("WorkStart").Value</th>
+                        <th>@_localization.GetKey("WorkEnd").Value</th>
+                        <th>@_localization.GetKey("CreatedDate").Value</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -144,12 +155,12 @@
             <table class="table table-striped admin-table" style="width:100%">
                 <thead>
                     <tr>
-                        <th>İsim-Soyisim</th>
-                        <th>Email</th>
-                        <th>Kullanıcı Tipi</th>
-                        <th>Parola</th>
-                        <th>Son Giriş Tarihi</th>
-                        <th>Kayıt Tarihi</th>
+                        <th>@_localization.GetKey("NameSurname").Value</th>
+                        <th>@_localization.GetKey("Email").Value</th>
+                        <th>@_localization.GetKey("UserType").Value</th>
+                        <th>@_localization.GetKey("Password").Value</th>
+                        <th>@_localization.GetKey("LastLoginDate").Value</th>
+                        <th>@_localization.GetKey("CreatedDate").Value</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -172,7 +183,7 @@
         <div id="menu-create_appointments" class="col-lg-10" style="display:none">
             <form action="/Home/AddDoctorWorkTime" method="post">
                 <div class="form-group w-50">
-                    <label for="MainScienceBranch">Doktor seçiniz:</label>
+                    <label for="MainScienceBranch">@_localization.GetKey("SelectDoctor").Value :</label>
                     <select name="doctor" class="form-control">
                         @foreach (var doctor in (@ViewBag.doctors as ICollection<AllUsersInfo>))
                         {
@@ -181,7 +192,7 @@
                     </select>
                 </div><br>
                 <div class="form-group w-50">
-                    <label for="Policlinic">Poliklinik Seçiniz:</label>
+                    <label for="Policlinic">@_localization.GetKey("SelectPoliclinic").Value :</label>
                     <select name="policlinic" class="form-control">
 
                         @foreach (var policlinic in (@ViewBag.policlinics as ICollection<AllPoliclinics>))
@@ -191,7 +202,7 @@
                     </select>
                 </div><br>
                 <div class="form-group w-50">
-                    <label for="MainBranch">Poliklinik Seçiniz:</label>
+                    <label for="MainBranch">@_localization.GetKey("SelectMainBranch").Value :</label>
                     <select name="main_branch" class="form-control">
 
                         @foreach (var branchs in (@ViewBag.branchs as ICollection<AllScienceBranchs>))
@@ -201,18 +212,74 @@
                     </select>
                 </div><br>
                 <div class="form-group w-50">
-                    <label for="birthday">Başlangıç Tarihi:</label>
+                    <label for="birthday">@_localization.GetKey("StartDate").Value:</label>
                     <input type="date" id="birthday" class="form-control w-50" name="start_date">
-                    <label for="birthday">Başlangıç Saati:</label><br>
+                    <label for="birthday">@_localization.GetKey("StartTime").Value:</label><br>
                     <input type="time" id="birthday" class="form-control w-50" name="start_time"><br>
                 </div>
                 <div class="form-group w-50">
-                    <label for="birthday">Bitiş Tarihi:</label>
+                    <label for="birthday">@_localization.GetKey("EndDate").Value:</label>
                     <input type="date" id="birthday" class="form-control w-50" name="end_date">
-                    <label for="birthday">Bitiş Saati:</label><br>
+                    <label for="birthday">@_localization.GetKey("EndTime").Value:</label><br>
                     <input type="time" id="birthday" class="form-control w-50" name="end_time"><br><hr>
-                    <button type="submit" class="btn btn-primary">Oluştur</button>
+                    <button type="submit" class="btn btn-primary">@_localization.GetKey("Create").Value</button>
                 </div>
+            </form>
+        </div>
+        <div id="menu-add_doctor" class="col-lg-10" style="display:none">
+            <form action="/Home/AddDoctor" method="post">
+                <div class="form-group w-50">
+                    <label for="MainScienceBranch">@_localization.GetKey("AddDoctor").Value :</label>
+                    <div class="form-group">
+                        <label for="exampleInputNameAndSurname">@_localization.GetKey("Name").Value</label>
+                        <input type="text" name="doctor_name" class="form-control" id="exampleInputPassword1" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputNameAndSurname">@_localization.GetKey("Surname").Value</label>
+                        <input type="text" name="doctor_surname" class="form-control" id="exampleInputPassword1" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputNameAndSurname">@_localization.GetKey("Email").Value</label>
+                        <input type="text" name="doctor_email" class="form-control" id="exampleInputPassword1" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputNameAndSurname">@_localization.GetKey("Password").Value</label>
+                        <input type="text" name="doctor_password" class="form-control" id="exampleInputPassword1" placeholder="Name">
+                    </div>
+                </div><br>
+               
+                <div class="form-group w-50">                    
+                    <button type="submit" class="btn btn-primary">@_localization.GetKey("Create").Value</button>
+                </div>
+            </form>
+        </div>
+        <div id="menu-add_main_branch" class="col-lg-10" style="display:none">
+            <form action="/Home/AddBranch" method="post">
+                <div class="form-group w-50">
+                    <label for="MainScienceBranch">@_localization.GetKey("AddMainScienceBranch").Value :</label>
+                    <div class="form-group">
+                        <label for="exampleInputNameAndSurname">@_localization.GetKey("BranchName").Value</label>
+                        <input type="text" name="branch_name" class="form-control" id="exampleInputPassword1" placeholder="Name">
+                    </div>
+                 </div>
+                <div class="form-group w-50">
+                    <button type="submit" class="btn btn-primary">@_localization.GetKey("Create").Value</button>
+                </div>
+            </form>
+        </div>
+        <div id="menu-add_policlinic" class="col-lg-10" style="display:none">
+            <form action="/Home/AddPoliclinic" method="post">
+                <div class="form-group w-50">
+                    <label for="MainScienceBranch">@_localization.GetKey("AddPoliclinic").Value :</label>
+                    <div class="form-group">
+                        <label for="exampleInputNameAndSurname">@_localization.GetKey("PoliclinicName").Value</label>
+                        <input type="text" name="policlinic_name" class="form-control" id="exampleInputPassword1" placeholder="Name">
+                    </div>
+
+                    <div class="form-group w-50">
+                        <button type="submit" class="btn btn-primary">@_localization.GetKey("Create").Value</button>
+                    </div>
+                  </div>
             </form>
         </div>
     </div>

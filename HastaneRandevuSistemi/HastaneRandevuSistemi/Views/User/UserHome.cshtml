@@ -2,51 +2,43 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Kullanıcı Panel";
+    ViewData["Title"] = @_localization.GetKey("UserPanel").Value;
 }
-<script>
-    alert(@TempData["email"]);
-</script>
+
 <div class="container-fluid" style="min-height: 10rem;">
     <div class="row">
         <div class="col-lg-2">
-            <!--
-            <ul class="drop-down" style="display: block;">
-                <li><a href="">Kullanıcılar</a></li>
-                <li><a href="">Randevular</a></li>
-                <li><a href="">Personeller</a></li>
-                <li><a href="">Ana Sayfa Slider</a></li>
-              </ul>         -->
+           
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-light h-100">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                    <span class="fs-4">Menu</span>
+                    <span class="fs-4">@_localization.GetKey("Menu").Value</span>
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li>
                         <a href="#" name="profile" class="nav-link side-bar active">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                            Profil
+                            @_localization.GetKey("Profile").Value
                         </a>
                     </li>
                     <li>
                         <a href="#" name="make_appointments" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                            Randevu Al
+                            @_localization.GetKey("MakeAppointment").Value
                         </a>
                     </li>
                     <li>
                         <a href="#" name="appointments" class="nav-link side-bar link-dark">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                            Randevularım
+                            @_localization.GetKey("Appointments").Value
                         </a>
                     </li>
                 </ul>
                 <hr>
                 <div class="dropdown">
                     <a href="@Url.Action("LogOut", "Home")" class="d-flex align-items-center link-dark text-decoration-none" aria-expanded="false">
-                        <strong>Log Out</strong>
+                        <strong>@_localization.GetKey("LogOut").Value</strong>
                     </a>
 
                 </div>
@@ -117,11 +109,11 @@
             <table id="appointments" class="table table-striped admin-table" style="width:100%">
                 <thead>
                     <tr>
-                        <th>İsim-Soyisim</th>
-                        <th>Randevu Yeri</th>
-                        <th>Doktor</th>
-                        <th>Randevu Saati</th>
-                        <th>Alındığı Tarih</th>
+                        <th>@_localization.GetKey("NameSurname").Value</th>
+                        <th>@_localization.GetKey("AppointmentPlace").Value</th>
+                        <th>@_localization.GetKey("Doctor").Value</th>
+                        <th>@_localization.GetKey("AppointmentDate").Value</th>
+                        <th>@_localization.GetKey("CreatedDate").Value</th>
                     </tr>
                 </thead>
                 <tbody>

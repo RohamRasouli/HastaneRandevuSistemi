@@ -13,6 +13,14 @@
         },
         "runtime": {
           "HastaneRandevuSistemi.dll": {}
+        },
+        "resources": {
+          "en-US/HastaneRandevuSistemi.resources.dll": {
+            "locale": "en-US"
+          },
+          "tr-TR/HastaneRandevuSistemi.resources.dll": {
+            "locale": "tr-TR"
+          }
         }
       },
       "Microsoft.AspNet.WebApi.Client/4.0.20710": {

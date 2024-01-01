@@ -14,25 +14,38 @@ using HastaneRandevuSistemi.Models;
 using Newtonsoft.Json.Linq;
 using HastaneRandevuSistemi.Models.ReturnClass;
 using HastaneRandevuSistemi.Models.AddClass;
+using Microsoft.AspNetCore.Localization;
+using HastaneRandevuSistemi.Services;
 
 namespace HastaneRandevuSistemi.Controllers
 {
 
     public class HomeController : Controller
     {
+        private LanguageService _localization;
         private readonly ILogger<HomeController> _logger;
         Uri baseAddress = new Uri("https://localhost:7078/api/"); // API address
         private readonly HttpClient _client;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, LanguageService localization)
         {
             _logger = logger;
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
+            _localization = localization;
         }
-    
+        public IActionResult ChangeLanguage(string culture)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)), new CookieOptions()
+                {
+                    Expires = DateTimeOffset.UtcNow.AddYears(1)
+                });
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
         public IActionResult Index()
         {
+            var culture = Thread.CurrentThread.CurrentCulture.Name;
             return View();
         }
         [HttpGet]
@@ -228,6 +241,86 @@ namespace HastaneRandevuSistemi.Controllers
             }
             ViewBag.data = _wt;
             return View();
+        }
+        [HttpPost]
+        public IActionResult AddDoctor(string doctor_name, string doctor_surname, string doctor_email, string doctor_password)
+        {
+            User _user = new User();
+            _user.UserFirstName = doctor_name;
+            _user.UserSecondName = doctor_surname;
+            _user.UserEmail = doctor_email;
+            _user.Password = doctor_password;
+            _user.CreatedDate = DateTime.Now;
+            _user.LastLoginDate = null;
+            _user.UserTypeId = 3; // doctor type
+            try
+            {
+                string data = JsonConvert.SerializeObject(_user);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage responce = _client.PostAsync(_client.BaseAddress + "Db/AddUser", content).Result;
+
+                if (responce.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Doktor kaydı başarılı";
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Doktor kaydı başarısız!!";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        [HttpPost]
+        public IActionResult AddBranch(string branch_name)
+        {
+            MainScienceBranch _branch = new MainScienceBranch();
+            _branch.ScienceName = branch_name;
+            _branch.CreatedDate = DateTime.Now;
+            try
+            {
+                string data = JsonConvert.SerializeObject(_branch);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage responce = _client.PostAsync(_client.BaseAddress + "Db/AddBranch/" + branch_name, content).Result;
+
+                if (responce.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Doktor kaydı başarılı";
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Doktor kaydı başarısız!!";
+                return View();
+            }
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        [HttpPost]
+        public IActionResult AddPoliclinic(string policlinic_name)
+        {
+            Policlinic _policlinic = new Policlinic();
+            _policlinic.PoliclinicName = policlinic_name;
+            _policlinic.CreatedDate = DateTime.Now;
+            try
+            {
+                string data = JsonConvert.SerializeObject(_policlinic);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage responce = _client.PostAsync(_client.BaseAddress + "Db/AddPolilinic/"+ policlinic_name, content).Result;
+
+                if (responce.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Poliklinik kaydı başarılı";
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Poliklinik kaydı başarısız!!";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

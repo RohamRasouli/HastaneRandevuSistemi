@@ -227,3 +227,10 @@ C:\Users\halil.akyildiz\Desktop\web projesi\v4\HastaneRandevuSistemi\HastaneRand
 C:\Users\halil.akyildiz\Desktop\web projesi\v4\HastaneRandevuSistemi\HastaneRandevuSistemi\bin\Debug\net6.0\WebApiContrib.Formatting.JavaScriptSerializer.dll
 C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\bin\Debug\net6.0\System.Net.Http.Formatting.dll
 C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\bin\Debug\net6.0\WebApiContrib.Formatting.JavaScriptSerializer.dll
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\bin\Debug\net6.0\en-US\HastaneRandevuSistemi.resources.dll
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\bin\Debug\net6.0\tr-TR\HastaneRandevuSistemi.resources.dll
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\obj\Debug\net6.0\HastaneRandevuSistemi.Resources.SharedResource.en-US.resources
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\obj\Debug\net6.0\HastaneRandevuSistemi.Resources.SharedResource.tr-TR.resources
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\obj\Debug\net6.0\HastaneRandevuSistemi.csproj.GenerateResource.cache
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\obj\Debug\net6.0\en-US\HastaneRandevuSistemi.resources.dll
+C:\Users\halil\OneDrive\Masaüstü\Hastana Randevu\HastaneRandevuSistemi\HastaneRandevuSistemi\obj\Debug\net6.0\tr-TR\HastaneRandevuSistemi.resources.dll

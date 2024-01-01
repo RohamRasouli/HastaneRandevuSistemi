@@ -163,6 +163,30 @@ namespace DbAPI.Controllers
             await _context.SaveChangesAsync();
             return Ok(await _context.DoctorWorkTimes.ToListAsync());
         }
+        [HttpPost]
+        [Route("api/[controller]/[action]/{mainBranch}")]
+        public async Task<IActionResult> AddBranch(Models.MainScienceBranch _mainBranch)
+        {
+            if (_mainBranch == null)
+                return BadRequest("Hata: Nesne null!");
+
+            var _context = new DbHastaneContext();
+            _context.MainScienceBranches.Add(_mainBranch);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.DoctorWorkTimes.ToListAsync());
+        }
+        [HttpPost]
+        [Route("api/[controller]/[action]/{mainPoliclinic}")]
+        public async Task<IActionResult> AddPoliclinic(Models.Policlinic _policlinic)
+        {
+            if (_policlinic == null)
+                return BadRequest("Hata: Nesne null!");
+
+            var _context = new DbHastaneContext();
+            _context.Policlinics.Add(_policlinic);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.DoctorWorkTimes.ToListAsync());
+        }
 
         [HttpGet]
         [Route("api/[controller]/[action]")]
