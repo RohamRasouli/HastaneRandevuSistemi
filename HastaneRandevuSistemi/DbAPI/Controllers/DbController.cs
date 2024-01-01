@@ -3,6 +3,7 @@
 using DbAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace DbAPI.Controllers
 {
@@ -49,9 +50,9 @@ namespace DbAPI.Controllers
             var _context = new DbHastaneContext();
             var results = from user in _context.Users
                           join user_type in _context.UserTypes on user.UserTypeId equals user_type.UserTypeId
-                          //where user.UserTypeId.Equals(2) // doktor tipi
                           select new
                           {
+                              user.UserId,
                               user.UserFirstName,
                               user.UserSecondName,
                               user.UserEmail,
@@ -63,9 +64,7 @@ namespace DbAPI.Controllers
             if (results == null || results.ToList().Count == 0)
             {
                 return BadRequest("Veri bulunamadý");
-            }
-
-           
+            }           
             return Ok(results.ToList());
         }
         [HttpGet]
@@ -119,6 +118,18 @@ namespace DbAPI.Controllers
             _context.Users.Add(_user);
             await _context.SaveChangesAsync();
             return Ok(await _context.Users.ToListAsync());
+        }
+        [HttpDelete]
+        [Route("api/[controller]/[action]/{u_id}")]
+        public async Task<IActionResult> DeleteUser(int u_id)
+        {
+            var _context = new DbHastaneContext();          
+
+             var result = _context.Users.Where(c => c.UserId.Equals(u_id)).ToList();
+             _context.Users.Remove(result.First());
+             await _context.SaveChangesAsync();
+             return Ok(await _context.Users.ToListAsync());
+            
         }
         [Route("api/[controller]/[action]")]
         [HttpGet]
@@ -235,19 +246,37 @@ namespace DbAPI.Controllers
             await _context.SaveChangesAsync();
             return Ok(await _context.DoctorWorkTimes.ToListAsync());
         }
+        [HttpDelete]
+        [Route("api/[controller]/[action]/{a_id}")]
+        public async Task<IActionResult> DeleteAppointment(int a_id)
+        {
+            var _context = new DbHastaneContext();
+            var result = _context.Appointments.Where(c => c.AppointmentId.Equals(a_id)).ToList();
+            if(result != null)
+            {
+                _context.Appointments.Remove(result.First());
+                await _context.SaveChangesAsync();
+            }
+            return Ok(await _context.Users.ToListAsync());
+
+        }
         [HttpGet]
         [Route("api/[controller]/[action]")]
         public async Task<IActionResult> GetAllAppointment()
         {
             var _context = new DbHastaneContext();
             var results = from appointment in _context.Appointments
-                          join user in _context.Users on appointment.DoctorId equals user.UserId
+                          join user in _context.Users on appointment.UserId equals user.UserId
+                          join doctor in _context.Users on appointment.DoctorId equals doctor.UserId
                           join mainBranch in _context.MainScienceBranches on appointment.MainScienceBranchId equals mainBranch.MainScienceBranchýd
                           join policlinic in _context.Policlinics on appointment.PoliclinicId equals policlinic.PoliclinicId
                           select new
                           {
+                              AppointmentId = appointment.AppointmentId,
                               user.UserFirstName,
                               user.UserSecondName,
+                              doctorFirstName = doctor.UserFirstName,
+                              doctorSecondName = doctor.UserSecondName,
                               policlinic.PoliclinicName,
                               mainBranch.ScienceName,
                               appointment.AppointmentDate,
@@ -272,6 +301,7 @@ namespace DbAPI.Controllers
                           where appointment.UserId.Equals(user_id)
                           select new
                           {
+                              AppointmentId = appointment.AppointmentId,
                               user.UserFirstName,
                               user.UserSecondName,
                               doctorFirstName = doctor.UserFirstName,

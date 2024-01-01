@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-2">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-light">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                     <span class="fs-4">@_localization.GetKey("Menu").Value</span>
                 </a>
@@ -88,10 +88,11 @@
                     @foreach (var user in (@ViewBag.doctors as ICollection<AllUsersInfo>))
                     {
                         <tr>
-                            <td>@user.UserFirstName+ @user.UserSecondName</td>
+                            <td>@user.UserFirstName @user.UserSecondName</td>
                             <td>@user.UserEmail</td>
                             <td>@user.Password</td>
                             <td>@user.CreatedDate</td>
+                            <td><a href="/Home/DeleteDoctor/@user.UserId" method="post">Sil</a></td>
                         </tr>
                     }
 
@@ -107,17 +108,21 @@
                         <th>@_localization.GetKey("AppointmentPlace").Value</th>
                         <th>@_localization.GetKey("Doctor").Value</th>
                         <th>@_localization.GetKey("AppointmentDate").Value</th>
+                        <th>@_localization.GetKey("CreatedDate").Value</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Halil Akyıldız</td>
-                        <td>Ortapedi ve Travmatoloji</td>
-                        <td>Tiger Nixon</td>
-                        <td>2011-04-25 12:00</td>
-                        <td><a class="doctor-detay" href="#">Detay</a></td>
-                    </tr>
-
+                    @foreach (var appointment in (@ViewBag.appointments as ICollection<AllAppointments>))
+                    {
+                        <tr>
+                            <td>@appointment.UserFirstName @appointment.UserSecondName</td>
+                            <td>@appointment.PoliclinicName</td>
+                            <td>@appointment.doctorFirstName @appointment.doctorSecondName</td>
+                            <td>@appointment.AppointmentDate</td>
+                            <td>@appointment.CreatetDate</td>
+                        </tr>
+                    }
+                   
                 </tbody>
             </table>
         </div>
@@ -292,7 +297,7 @@
     <h2 class="text-center">Halil Akyıldız</h2>
     <hr>
     <div class="card col-lg-3 col-md-4 col-sm-6 d-inline-block">
-        <img class="card-img-top" src="./img/doctors/d1.jpg" alt="Card image cap">
+        <img class="card-img-top" src="/img/doctors/d2.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Lorem, ipsum dolor.</p>

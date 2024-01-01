@@ -99,6 +99,15 @@ namespace HastaneRandevuSistemi.Controllers
             }
             ViewBag.policlinics = policlinics;
 
+            List<AllAppointments> appointments = new List<AllAppointments>();
+            var response_6 = _client.GetAsync(_client.BaseAddress + "Db/GetAllAppointment").Result;
+            if (response_6.IsSuccessStatusCode)
+            {
+                var data = response_6.Content.ReadAsStringAsync().Result;
+                appointments = JsonConvert.DeserializeObject<List<AllAppointments>>(data);
+            }
+            ViewBag.appointments = appointments;
+
             return View();
         }
         [HttpGet]
@@ -268,6 +277,28 @@ namespace HastaneRandevuSistemi.Controllers
             catch (Exception ex)
             {
                 ViewBag.Message = "Doktor kaydı başarısız!!";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        [HttpGet]
+        [Route("[controller]/[action]/{d_id}")]
+        public IActionResult DeleteDoctor(int d_id)
+        {
+            try
+            {
+                HttpResponseMessage responce = _client.DeleteAsync(_client.BaseAddress + "Db/DeleteUser/"+d_id.ToString()).Result;
+
+                if (responce.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Silme başarılı";
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Silme başarısız!!";
                 return Redirect(Request.Headers["Referer"].ToString());
             }
             return Redirect(Request.Headers["Referer"].ToString());

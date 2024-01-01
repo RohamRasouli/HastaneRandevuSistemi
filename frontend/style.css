@@ -83,6 +83,12 @@ footer div{
         height: 10rem;
         object-fit: cover;
     }
+    .pop-up{
+        position: absolute;
+        top: 0;
+        left:0;
+        width: 100%;
+    }
 }
 @media (min-width:800px){
     .hamburger-button{

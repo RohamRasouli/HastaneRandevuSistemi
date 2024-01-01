@@ -2,6 +2,7 @@
 {
     public class AllAppointments
     {
+        public int? AppointmentId { get; set; }
         public string? UserFirstName { get; set; }
         public string? UserSecondName { get; set; }
         public string? doctorFirstName { get; set; }

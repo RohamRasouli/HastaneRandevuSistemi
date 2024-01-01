@@ -96,5 +96,27 @@ namespace HastaneRandevuSistemi.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        [Route("[controller]/[action]/{a_id}")]
+        public IActionResult DeleteAppointment(int a_id)
+        {
+            try
+            {
+                HttpResponseMessage responce = _client.DeleteAsync(_client.BaseAddress + "Db/DeleteAppointment/" + a_id.ToString()).Result;
+
+                if (responce.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Silme başarılı";
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Silme başarısız!!";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
     }
 }
