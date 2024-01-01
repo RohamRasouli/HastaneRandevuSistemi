@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HastaneRandevuSistemi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1aa4fc6c26dfccfed01cb093d6424ba5051e1cec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d6c12141550713b60c6320940177aaeb325f483")]
 [assembly: System.Reflection.AssemblyProductAttribute("HastaneRandevuSistemi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HastaneRandevuSistemi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

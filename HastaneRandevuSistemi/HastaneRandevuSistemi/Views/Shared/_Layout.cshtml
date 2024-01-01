@@ -38,7 +38,7 @@
     
   <nav class="navbar bg-primary navbar-dark navbar-expand-sm my-3 shadow-lg">
     <div class="container">
-      <a href="#" class="navbar-brand">@_localization.GetKey("NavTitle").Value</a>
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand">@_localization.GetKey("NavTitle").Value</a>
       <div class="nav-links">
         <ul class="nav-link-item">
                     <li><a href="#our-doctors">@_localization.GetKey("OurDoctors").Value</a></li>
@@ -49,6 +49,10 @@
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <li class="border rounded user-in"><a href="@Url.Action("LogIn", "Home")">@_localization.GetKey("LogIn").Value</a></li>
+                    }
+                    else
+                    {
+                        <li class="border rounded user-in"><a href="@Url.Action("AdminPanel", "Home")">@_localization.GetKey("AdminPanel").Value</a></li>
                     }
                     
                     
@@ -62,21 +66,24 @@
   <div id="" class="nav-links bg-primary drop-down-id">
     <div class="nav-links">
       <ul class="drop-down" style="display: block;">
-        <li><a href="">Our doctors</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contac</a></li>
-        <li><a href="SignIn.html">Sign In</a></li>
-        <li><a href="LogIn.html">Log In</a></li>
-      </ul>            
+                <li><a href="">@_localization.GetKey("OurDoctors").Value</a></li>
+                <li><a href="">@_localization.GetKey("AboutUs").Value</a></li>
+                <li><a href="">@_localization.GetKey("Contact").Value</a></li>
+                <li class="border rounded user-in"><a href="@Url.Action("SignIn", "Home")">@_localization.GetKey("SignIn").Value</a></li>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li class="border rounded user-in"><a href="@Url.Action("LogIn", "Home")">@_localization.GetKey("LogIn").Value</a></li>
+                }
+                else
+                {
+                    <li class="border rounded user-in"><a href="@Url.Action("AdminPanel", "Home")">@_localization.GetKey("AdminPanel").Value</a></li>
+                }
+            </ul>            
     </div>      
   </div>
   
     @RenderBody();
-  <footer>
-    <div class="copyright">
-          <small>© 2023 Copyright </small>
-    </div>
-  </footer>
+
 
 
     
